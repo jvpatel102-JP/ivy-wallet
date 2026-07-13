@@ -1268,7 +1268,14 @@ private fun Preview(theme: Theme = Theme.LIGHT) {
             lockApp = false,
             currencyCode = "BGN",
             onSetCurrency = {},
-            languageOptionVisible = true
+            languageOptionVisible = true,
+            googleSyncEnabled = false,
+            googleAccountEmail = null,
+            lastSyncTime = 0L,
+            isSyncing = false,
+            onConnectGoogle = {},
+            onDisconnectGoogle = {},
+            onTriggerSync = {}
         )
     }
 }
