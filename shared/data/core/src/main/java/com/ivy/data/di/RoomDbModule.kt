@@ -51,7 +51,7 @@ object RoomDbModule {
         val tables = arrayOf(
             "accounts", "transactions", "categories", "budgets",
             "planned_payment_rules", "loans", "loan_records",
-            "tags", "tag_associations"
+            "tags", "tags_association"
         )
         db.invalidationTracker.addObserver(object : InvalidationTracker.Observer(tables) {
             override fun onInvalidated(tables: Set<String>) {
