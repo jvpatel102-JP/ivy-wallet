@@ -84,8 +84,8 @@ fun BoxWithConstraintsScope.SettingsScreen() {
     val rootScreen = rootScreen()
     val context = androidx.compose.ui.platform.LocalContext.current
 
-    val googleSignInLauncher = androidx.compose.activity.compose.rememberLauncherForActivityResult(
-        contract = androidx.compose.activity.result.contract.ActivityResultContracts.StartActivityForResult()
+    val googleSignInLauncher = androidx.activity.compose.rememberLauncherForActivityResult(
+        contract = androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult()
     ) { result ->
         val task = com.google.android.gms.auth.api.signin.GoogleSignIn.getSignedInAccountFromIntent(result.data)
         try {
