@@ -480,59 +480,12 @@ private fun QuickAccess(
             }
 
             Spacer(Modifier.weight(1f))
-        }
-
-        Spacer(Modifier.height(16.dp))
-
-        // Second Row
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.Top
-        ) {
-            Spacer(Modifier.weight(1f))
-
-            val context = LocalContext.current
-//        MoreMenuButton(
-//            icon = R.drawable.home_more_menu_reports,
-//            label = "Charts"
-//        ) {
-//            ivyContext.navigateTo(Screen.Charts)
-//        }
-
-            val rootScreen = rootScreen()
-            MoreMenuButton(
-                icon = R.drawable.home_more_menu_share,
-                label = stringResource(R.string.share_ivy)
-            ) {
-                rootScreen.shareIvyWallet()
-            }
-
-            Spacer(Modifier.weight(1f))
 
             MoreMenuButton(
                 icon = R.drawable.home_more_menu_reports,
                 label = stringResource(R.string.reports),
             ) {
                 nav.navigateTo(ReportScreen)
-            }
-
-            Spacer(Modifier.weight(1f))
-
-            MoreMenuButton(
-                icon = R.drawable.home_more_menu_budgets,
-                label = stringResource(R.string.budgets),
-            ) {
-                nav.navigateTo(BudgetScreen)
-            }
-
-            Spacer(Modifier.weight(1f))
-
-            MoreMenuButton(
-                icon = R.drawable.home_more_menu_loans,
-                label = stringResource(R.string.loans),
-            ) {
-                nav.navigateTo(LoansScreen)
             }
 
             Spacer(Modifier.weight(1f))

@@ -52,20 +52,20 @@ fun AccountDropdown(
                     UI.shapes.rFull
                 )
                 .clickable { expanded = true }
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(horizontal = 12.dp, vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             val textColor = selectedAccount?.color?.toComposeColor()?.let {
                 findContrastTextColor(it)
             } ?: UI.colors.pureInverse
-
+ 
             if (selectedAccount != null) {
                 ItemIconSDefaultIcon(
                     iconName = selectedAccount.icon,
                     defaultIcon = R.drawable.ic_custom_account_s,
                     tint = textColor
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(4.dp))
                 Text(
                     text = selectedAccount.name,
                     style = UI.typo.b2.style(
@@ -82,7 +82,7 @@ fun AccountDropdown(
                     )
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(4.dp))
             IvyIcon(
                 icon = R.drawable.ic_expand_more,
                 tint = textColor

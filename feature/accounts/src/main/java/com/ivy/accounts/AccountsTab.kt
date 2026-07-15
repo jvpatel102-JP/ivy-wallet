@@ -137,7 +137,7 @@ private fun BoxWithConstraintsScope.UI(
             }
             if (!state.hideTotalBalance) {
                 Column {
-                    Spacer(Modifier.height(16.dp))
+                    Spacer(Modifier.height(10.dp))
                     IncomeExpensesRow(
                         currency = state.baseCurrency,
                         incomeLabel = stringResource(id = R.string.total_balance),
@@ -146,11 +146,11 @@ private fun BoxWithConstraintsScope.UI(
                         expenses = state.totalBalanceWithExcluded.toDoubleOrNull() ?: 0.00
                     )
                 }
-                Spacer(Modifier.height(16.dp))
+                Spacer(Modifier.height(10.dp))
             }
         }
         items(state.accountsData) {
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(10.dp))
             AccountCard(
                 baseCurrency = state.baseCurrency,
                 accountData = it,
@@ -233,7 +233,7 @@ private fun AccountCard(
         )
 
         if (!compactModeEnabled) {
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(8.dp))
 
             IncomeExpensesRow(
                 currency = currency,
@@ -243,7 +243,7 @@ private fun AccountCard(
                 expenses = accountData.monthlyExpenses
             )
 
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(8.dp))
         }
     }
 }
@@ -263,7 +263,7 @@ private fun AccountHeader(
             .fillMaxWidth()
             .background(account.color.value.toComposeColor(), UI.shapes.r4Top)
     ) {
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(10.dp))
 
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -298,7 +298,7 @@ private fun AccountHeader(
             }
         }
 
-        Spacer(Modifier.height(4.dp))
+        Spacer(Modifier.height(2.dp))
 
         BalanceRow(
             modifier = Modifier
@@ -331,7 +331,7 @@ private fun AccountHeader(
             )
         }
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(10.dp))
     }
 }
 

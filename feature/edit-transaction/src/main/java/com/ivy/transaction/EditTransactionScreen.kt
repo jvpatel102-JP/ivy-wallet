@@ -282,7 +282,7 @@ private fun BoxWithConstraintsScope.UI(
             .navigationBarsPadding()
             .verticalScroll(scrollState)
     ) {
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(8.dp))
 
         Toolbar(
             // Setting the transaction type to TransactionType.TRANSFER for transactions associated
@@ -299,7 +299,7 @@ private fun BoxWithConstraintsScope.UI(
             onDuplicate = onDuplicate
         )
 
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(16.dp))
 
         Title(
             type = transactionType,
@@ -340,19 +340,19 @@ private fun BoxWithConstraintsScope.UI(
             )
         }
 
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(16.dp))
 
         Category(category = category, onChooseCategory = {
             chooseCategoryModalVisible = true
         })
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(8.dp))
 
         AddTagButton(transactionAssociatedTags = transactionAssociatedTags, onClick = {
             tagModelVisible = true
         })
 
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(16.dp))
 
         val ivyContext = ivyWalletCtx()
 
@@ -368,7 +368,7 @@ private fun BoxWithConstraintsScope.UI(
                 }
             }
 
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(8.dp))
         }
 
         Description(
@@ -385,7 +385,7 @@ private fun BoxWithConstraintsScope.UI(
         )
 
         if (transactionType == TransactionType.TRANSFER && customExchangeRateState.showCard) {
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(8.dp))
             CustomExchangeRateCard(
                 fromCurrencyCode = baseCurrency,
                 toCurrencyCode = customExchangeRateState.toCurrencyCode ?: baseCurrency,
@@ -403,7 +403,7 @@ private fun BoxWithConstraintsScope.UI(
         }
 
         if (dueDate == null && transactionType != TransactionType.TRANSFER && dateTime == null) {
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(8.dp))
 
             val nav = navigation()
             AddPrimaryAttributeButton(

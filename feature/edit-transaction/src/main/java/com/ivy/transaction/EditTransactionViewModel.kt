@@ -986,12 +986,7 @@ class EditTransactionViewModel @Inject constructor(
     }
 
     private suspend fun sortCategories(): ImmutableList<Category> {
-        val categories = categoryRepository.findAll()
-        return if (shouldSortCategoriesAscending()) {
-            categories.sortedBy { it.name.value }.toImmutableList()
-        } else {
-            categories.toImmutableList()
-        }
+        return categoryRepository.findAll().toImmutableList()
     }
 
     private suspend fun shouldSortCategoriesAscending(): Boolean {
