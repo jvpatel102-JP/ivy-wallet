@@ -58,6 +58,8 @@ import com.ivy.wallet.ui.theme.GradientGreen
 import com.ivy.wallet.ui.theme.GradientIvy
 import com.ivy.wallet.ui.theme.Green
 import com.ivy.wallet.ui.theme.Ivy
+import com.ivy.wallet.ui.theme.Orange
+import com.ivy.wallet.ui.theme.Purple
 import com.ivy.wallet.ui.theme.White
 import com.ivy.wallet.ui.theme.components.IvyCircleButton
 import com.ivy.wallet.ui.theme.components.IvyIcon
@@ -135,7 +137,23 @@ fun BoxWithConstraintsScope.BottomBar(
             selectTab(MainTab.HOME)
         }
 
-        Spacer(Modifier.width(FAB_BUTTON_SIZE))
+        Tab(
+            icon = R.drawable.ic_vue_chart_chart,
+            name = "Analysis",
+            selected = tab == MainTab.ANALYSIS,
+            selectedColor = Orange
+        ) {
+            selectTab(MainTab.ANALYSIS)
+        }
+
+        Tab(
+            icon = R.drawable.ic_planned_payments,
+            name = "Planned",
+            selected = tab == MainTab.PLANNED,
+            selectedColor = Purple
+        ) {
+            selectTab(MainTab.PLANNED)
+        }
 
         Tab(
             icon = R.drawable.ic_accounts,
@@ -144,6 +162,15 @@ fun BoxWithConstraintsScope.BottomBar(
             selectedColor = Green
         ) {
             selectTab(MainTab.ACCOUNTS)
+        }
+
+        Tab(
+            icon = R.drawable.ic_custom_category_m,
+            name = "Categories",
+            selected = tab == MainTab.CATEGORIES,
+            selectedColor = Ivy
+        ) {
+            selectTab(MainTab.CATEGORIES)
         }
     }
 
@@ -161,9 +188,9 @@ fun BoxWithConstraintsScope.BottomBar(
     }
 
     // ------------------------------------ BUTTONS--------------------------------------------------
-    val fabStartX = ivyContext.screenWidth / 2 - FAB_BUTTON_SIZE.toDensityPx() / 2
+    val fabStartX = ivyContext.screenWidth - FAB_BUTTON_SIZE.toDensityPx() - 24.dp.toDensityPx()
     val fabStartY = ivyContext.screenHeight - navigationBarInset() -
-            30.dp.toDensityPx() - FAB_BUTTON_SIZE.toDensityPx()
+            80.dp.toDensityPx() - FAB_BUTTON_SIZE.toDensityPx()
 
     TransactionButtons(
         buttonsShownPercent = buttonsShownPercent,
@@ -195,7 +222,7 @@ fun BoxWithConstraintsScope.BottomBar(
             .size(FAB_BUTTON_SIZE)
             .rotate(fabRotation)
             .zIndex(200f)
-            .thenIf(tab == MainTab.HOME) {
+            .thenIf(tab != MainTab.ACCOUNTS) {
                 pointerInput(Unit) {
                     detectDragGestures(
                         onDragCancel = {
@@ -240,27 +267,23 @@ fun BoxWithConstraintsScope.BottomBar(
         backgroundPadding = 8.dp,
         icon = R.drawable.ic_add,
         backgroundGradient = when (tab) {
-            MainTab.HOME -> {
-                if (!expanded) GradientIvy else Gradient.solid(UI.colors.gray)
-            }
-
             MainTab.ACCOUNTS -> {
                 GradientGreen
             }
+            else -> {
+                if (!expanded) GradientIvy else Gradient.solid(UI.colors.gray)
+            }
         },
         hasShadow = !expanded,
-        tint = when (tab) {
-            MainTab.HOME -> White
-            MainTab.ACCOUNTS -> White
-        }
+        tint = White
     ) {
         when (tab) {
-            MainTab.HOME -> {
-                expanded = !expanded
-            }
-
             MainTab.ACCOUNTS -> {
                 showAddAccountModal()
+            }
+
+            else -> {
+                expanded = !expanded
             }
         }
     }

@@ -12,6 +12,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Alignment
+import com.ivy.wallet.ui.theme.components.CircleButtonFilled
 import com.ivy.base.model.TransactionType
 import com.ivy.data.model.Category
 import com.ivy.data.model.CategoryId
@@ -38,12 +43,16 @@ import java.time.ZoneOffset
 import java.util.UUID
 
 @Composable
-fun BoxWithConstraintsScope.PlannedPaymentsScreen(screen: PlannedPaymentsScreen) {
+fun BoxWithConstraintsScope.PlannedPaymentsScreen(
+    screen: PlannedPaymentsScreen,
+    isTab: Boolean = false
+) {
     val viewModel: PlannedPaymentsViewModel = screenScopedViewModel()
     val uiState = viewModel.uiState()
 
     UI(
         state = uiState,
+        isTab = isTab,
         onEvent = viewModel::onEvent
     )
 }
@@ -51,20 +60,46 @@ fun BoxWithConstraintsScope.PlannedPaymentsScreen(screen: PlannedPaymentsScreen)
 @Composable
 private fun BoxWithConstraintsScope.UI(
     state: PlannedPaymentsScreenState,
+    isTab: Boolean = false,
     onEvent: (PlannedPaymentsScreenEvent) -> Unit = {}
 ) {
+    val nav = navigation()
     PlannedPaymentsLazyColumn(
         Header = {
             Spacer(Modifier.height(32.dp))
 
-            Text(
-                modifier = Modifier.padding(start = 24.dp),
-                text = stringResource(R.string.planned_payments_inline),
-                style = UI.typo.h2.style(
-                    fontWeight = FontWeight.ExtraBold,
-                    color = UI.colors.pureInverse
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Spacer(Modifier.width(24.dp))
+
+                Text(
+                    text = stringResource(R.string.planned_payments_inline),
+                    style = UI.typo.h2.style(
+                        fontWeight = FontWeight.ExtraBold,
+                        color = UI.colors.pureInverse
+                    )
                 )
-            )
+
+                Spacer(Modifier.weight(1f))
+
+                if (isTab) {
+                    CircleButtonFilled(
+                        icon = R.drawable.ic_plus,
+                        onClick = {
+                            nav.navigateTo(
+                                EditPlannedScreen(
+                                    type = TransactionType.EXPENSE,
+                                    plannedPaymentRuleId = null
+                                )
+                            )
+                        },
+                        clickAreaPadding = 12.dp
+                    )
+                    Spacer(Modifier.width(24.dp))
+                }
+            }
 
             Spacer(Modifier.height(24.dp))
         },
@@ -88,20 +123,21 @@ private fun BoxWithConstraintsScope.UI(
         listState = rememberScrollPositionListState(key = "plannedPayments")
     )
 
-    val nav = navigation()
-    PlannedPaymentsBottomBar(
-        onClose = {
-            nav.back()
-        },
-        onAdd = {
-            nav.navigateTo(
-                EditPlannedScreen(
-                    type = TransactionType.EXPENSE,
-                    plannedPaymentRuleId = null
+    if (!isTab) {
+        PlannedPaymentsBottomBar(
+            onClose = {
+                nav.back()
+            },
+            onAdd = {
+                nav.navigateTo(
+                    EditPlannedScreen(
+                        type = TransactionType.EXPENSE,
+                        plannedPaymentRuleId = null
+                    )
                 )
-            )
-        }
-    )
+            }
+        )
+    }
 }
 
 @Preview

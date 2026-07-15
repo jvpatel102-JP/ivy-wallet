@@ -75,13 +75,15 @@ import java.util.UUID
 @ExperimentalFoundationApi
 @Composable
 fun BoxWithConstraintsScope.ReportScreen(
-    screen: ReportScreen
+    screen: ReportScreen,
+    isTab: Boolean = false
 ) {
     val viewModel: ReportViewModel = viewModel()
     val state = viewModel.uiState()
 
     UI(
         state = state,
+        isTab = isTab,
         onEventHandler = viewModel::onEvent
     )
 }
@@ -90,6 +92,7 @@ fun BoxWithConstraintsScope.ReportScreen(
 @Composable
 private fun BoxWithConstraintsScope.UI(
     state: ReportScreenState = ReportScreenState(),
+    isTab: Boolean = false,
     onEventHandler: (ReportScreenEvent) -> Unit = {}
 ) {
     val legacyTransactions = state.transactions
@@ -127,6 +130,7 @@ private fun BoxWithConstraintsScope.UI(
     ) {
         stickyHeader {
             Toolbar(
+                isTab = isTab,
                 onExport = {
                     onEventHandler.invoke(ReportScreenEvent.OnExport(context = context))
                 },
@@ -363,12 +367,13 @@ private fun NoFilterEmptyState(
 
 @Composable
 private fun Toolbar(
+    isTab: Boolean,
     onExport: () -> Unit,
     onFilter: () -> Unit
 ) {
     val nav = navigation()
     IvyToolbar(
-        backButtonType = BackButtonType.CLOSE,
+        backButtonType = if (isTab) BackButtonType.NONE else BackButtonType.CLOSE,
         onBack = {
             nav.back()
         }

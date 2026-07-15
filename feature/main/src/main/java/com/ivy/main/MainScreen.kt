@@ -25,6 +25,9 @@ import com.ivy.navigation.navigation
 import com.ivy.wallet.domain.deprecated.logic.model.CreateAccountData
 import com.ivy.wallet.ui.theme.modal.edit.AccountModal
 import com.ivy.wallet.ui.theme.modal.edit.AccountModalData
+import com.ivy.reports.ReportScreen
+import com.ivy.planned.list.PlannedPaymentsScreen
+import com.ivy.categories.CategoriesScreen
 
 @ExperimentalAnimationApi
 @ExperimentalFoundationApi
@@ -62,7 +65,10 @@ private fun BoxWithConstraintsScope.UI(
 ) {
     when (tab) {
         MainTab.HOME -> HomeTab()
+        MainTab.ANALYSIS -> ReportScreen(screen = com.ivy.navigation.ReportScreen, isTab = true)
+        MainTab.PLANNED -> PlannedPaymentsScreen(screen = com.ivy.navigation.PlannedPaymentsScreen, isTab = true)
         MainTab.ACCOUNTS -> AccountsTab()
+        MainTab.CATEGORIES -> CategoriesScreen(screen = com.ivy.navigation.CategoriesScreen, isTab = true)
     }
 
     var accountModalData: AccountModalData? by remember { mutableStateOf(null) }

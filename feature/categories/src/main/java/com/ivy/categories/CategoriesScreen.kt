@@ -91,12 +91,15 @@ import kotlinx.collections.immutable.persistentListOf
 import java.util.UUID
 
 @Composable
-fun BoxWithConstraintsScope.CategoriesScreen(screen: CategoriesScreen) {
+fun BoxWithConstraintsScope.CategoriesScreen(
+    screen: com.ivy.navigation.CategoriesScreen,
+    isTab: Boolean = false
+) {
     val viewModel: CategoriesViewModel = screenScopedViewModel()
     val state = viewModel.uiState()
-
     UI(
         state = state,
+        isTab = isTab,
         onEvent = viewModel::onEvent
     )
 }
@@ -107,6 +110,7 @@ private fun BoxWithConstraintsScope.UI(
         compactCategoriesModeEnabled = false,
         showCategorySearchBar = false
     ),
+    isTab: Boolean = false,
     onEvent: (CategoriesScreenEvent) -> Unit = {}
 ) {
     val nav = navigation()
@@ -157,6 +161,21 @@ private fun BoxWithConstraintsScope.UI(
 
                 Spacer(modifier = Modifier.width(16.dp))
 
+                if (isTab) {
+                    CircleButtonFilled(
+                        icon = R.drawable.ic_plus,
+                        onClick = {
+                            onEvent(
+                                CategoriesScreenEvent.OnCategoryModalVisible(
+                                    CategoryModalData(category = null)
+                                )
+                            )
+                        },
+                        clickAreaPadding = 12.dp
+                    )
+                    Spacer(modifier = Modifier.width(16.dp))
+                }
+
                 ReorderButton {
                     onEvent(CategoriesScreenEvent.OnReorderModalVisible(true))
                 }
@@ -193,18 +212,20 @@ private fun BoxWithConstraintsScope.UI(
             Spacer(Modifier.height(150.dp)) // scroll hack
         }
     }
-    CategoriesBottomBar(
-        onAddCategory = {
-            onEvent(
-                CategoriesScreenEvent.OnCategoryModalVisible(
-                    CategoryModalData(category = null)
+    if (!isTab) {
+        CategoriesBottomBar(
+            onAddCategory = {
+                onEvent(
+                    CategoriesScreenEvent.OnCategoryModalVisible(
+                        CategoryModalData(category = null)
+                    )
                 )
-            )
-        },
-        onClose = {
-            nav.back()
-        },
-    )
+            },
+            onClose = {
+                nav.back()
+            },
+        )
+    }
 
     ReorderModalSingleType(
         visible = state.reorderModalVisible,

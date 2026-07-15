@@ -12,7 +12,7 @@ import com.ivy.wallet.ui.theme.gradientCutBackgroundBottom
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 enum class BackButtonType {
-    BACK, CLOSE
+    BACK, CLOSE, NONE
 }
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
@@ -48,6 +48,10 @@ fun IvyToolbar(
                 ) {
                     onBack()
                 }
+            }
+
+            BackButtonType.NONE -> {
+                // Do not display any back or close button
             }
         }
 
