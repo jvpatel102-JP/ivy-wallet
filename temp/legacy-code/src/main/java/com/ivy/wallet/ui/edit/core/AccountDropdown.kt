@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
@@ -45,47 +46,45 @@ fun AccountDropdown(
     Box(modifier = modifier) {
         Row(
             modifier = Modifier
-                .clip(UI.shapes.rFull)
-                .border(2.dp, UI.colors.medium, UI.shapes.rFull)
-                .background(
-                    selectedAccount?.color?.toComposeColor() ?: UI.colors.pure,
-                    UI.shapes.rFull
-                )
+                .fillMaxWidth()
+                .clip(androidx.compose.foundation.shape.RoundedCornerShape(8.dp))
+                .border(1.dp, UI.colors.medium, androidx.compose.foundation.shape.RoundedCornerShape(8.dp))
+                .background(UI.colors.pure, androidx.compose.foundation.shape.RoundedCornerShape(8.dp))
                 .clickable { expanded = true }
-                .padding(horizontal = 12.dp, vertical = 6.dp),
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val textColor = selectedAccount?.color?.toComposeColor()?.let {
-                findContrastTextColor(it)
-            } ?: UI.colors.pureInverse
- 
+            val textColor = UI.colors.pureInverse
+            val arrowColor = UI.colors.mediumInverse
+
             if (selectedAccount != null) {
-                ItemIconSDefaultIcon(
-                    iconName = selectedAccount.icon,
-                    defaultIcon = R.drawable.ic_custom_account_s,
-                    tint = textColor
+                Box(
+                    modifier = Modifier
+                        .size(16.dp)
+                        .clip(androidx.compose.foundation.shape.CircleShape)
+                        .background(selectedAccount.color.toComposeColor())
                 )
-                Spacer(modifier = Modifier.width(4.dp))
+                Spacer(modifier = Modifier.width(12.dp))
                 Text(
                     text = selectedAccount.name,
                     style = UI.typo.b2.style(
                         color = textColor,
-                        fontWeight = FontWeight.ExtraBold
+                        fontWeight = FontWeight.Bold
                     )
                 )
             } else {
                 Text(
                     text = stringResource(R.string.account),
                     style = UI.typo.b2.style(
-                        color = textColor,
-                        fontWeight = FontWeight.ExtraBold
+                        color = arrowColor,
+                        fontWeight = FontWeight.Normal
                     )
                 )
             }
-            Spacer(modifier = Modifier.width(4.dp))
+            Spacer(modifier = Modifier.weight(1f))
             IvyIcon(
                 icon = R.drawable.ic_expand_more,
-                tint = textColor
+                tint = arrowColor
             )
         }
 
