@@ -198,21 +198,21 @@ abstract class IvyWalletDesign : IvyDesign {
     @Deprecated("Old design system. Use `:ivy-design` and Material3")
     override fun shapes(): IvyShapes {
         return object : IvyShapes() {
-            override val r1 = RoundedCornerShape(32.dp)
-            override val r1Top = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)
-            override val r1Bot = RoundedCornerShape(bottomStart = 32.dp, bottomEnd = 32.dp)
+            override val r1 = RoundedCornerShape(8.dp)
+            override val r1Top = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
+            override val r1Bot = RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp)
 
-            override val r2 = RoundedCornerShape(24.dp)
-            override val r2Top = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
-            override val r2Bot = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp)
+            override val r2 = RoundedCornerShape(8.dp)
+            override val r2Top = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
+            override val r2Bot = RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp)
 
-            override val r3 = RoundedCornerShape(20.dp)
-            override val r3Top = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
-            override val r3Bot = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
+            override val r3 = RoundedCornerShape(8.dp)
+            override val r3Top = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
+            override val r3Bot = RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp)
 
-            override val r4 = RoundedCornerShape(16.dp)
-            override val r4Top = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
-            override val r4Bot = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
+            override val r4 = RoundedCornerShape(8.dp)
+            override val r4Top = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
+            override val r4Bot = RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp)
         }
     }
 }

@@ -3,6 +3,7 @@ package com.ivy.design.l0_system
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
 
 @Deprecated("Old design system. Use `:ivy-design` and Material3")
 abstract class IvyShapes {
@@ -22,6 +23,6 @@ abstract class IvyShapes {
     abstract val r4Top: CornerBasedShape
     abstract val r4Bot: CornerBasedShape
 
-    val rFull: CornerBasedShape = RoundedCornerShape(percent = 50)
+    val rFull: CornerBasedShape = RoundedCornerShape(8.dp)
     val circle = CircleShape
 }
